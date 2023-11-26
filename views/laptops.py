@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from model import core
+from models import core
 
 
 def get_laptops(db: Session, skip: int = 0, limit: int = 100):

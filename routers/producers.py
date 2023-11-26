@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from model import schemes
+from models import schemes
 
 from views.producers import get_producers
-from model.database import get_db
+from models.database import get_db
 
 
 router = APIRouter()

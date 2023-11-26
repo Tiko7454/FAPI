@@ -48,7 +48,7 @@ class ProducerBase(BaseModel):
     place: str
 
 
-class ProducerCreate(LaptopBase):
+class ProducerCreate(ProducerBase):
     pass
 
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from model import core
-from model.database import engine
+from models import core
+from models.database import engine
 from routers.laptops import router as laptops_router
 from routers.producers import router as producers_router
 from routers.market_offers import router as market_offers_router
