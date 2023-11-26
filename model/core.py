@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Date, Numeric
 from sqlalchemy.orm import mapped_column, relationship
-
-from .database import Base
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 
 class MarketOffer(Base):

@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from model import schemes
 
-from controllers.laptops import get_laptops
+from views.laptops import get_laptops
 from model.database import get_db
 
 

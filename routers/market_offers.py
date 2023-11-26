@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from model import schemes
 
-from controllers.market_offers import get_market_offers
+from views.market_offers import get_market_offers
 from model.database import get_db
 
 

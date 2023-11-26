@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from model import schemes
 
-from controllers.producers import get_producers
+from views.producers import get_producers
 from model.database import get_db
 
 
