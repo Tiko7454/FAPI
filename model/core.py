@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Double, Date
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Numeric
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -11,10 +11,10 @@ class Laptop(Base):
     cpu = Column(String)
     gpu = Column(String)
     model = Column(String, unique=True, index=True)
-    screen_size = Column(Double)
+    screen_size = Column(Numeric)
     memory = Column(Integer)
 
-    market_offers = relationship("MarketOffer", back_populates="laptop")
+    # market_offers = relationship("MarketOffer", back_populates="laptop")
 
 
 class Producer(Base):
@@ -26,7 +26,7 @@ class Producer(Base):
     country = Column(String)
     place = Column(String)
 
-    market_offers = relationship("MarketOffer", back_populates="producer")
+#     market_offers = relationship("MarketOffer", back_populates="producer")
 
 
 class MarketOffer(Base):
@@ -35,7 +35,7 @@ class MarketOffer(Base):
     id = Column(Integer, primary_key=True, index=True)
     volume = Column(Integer)
     date = Column(Date)
-    cost = Column(Double)
+    cost = Column(Numeric)
 
-    laptop = relationship("Laptop", back_populates="market_offers")
-    producer = relationship("Producer", back_populates="market_offers")
+    # laptop = relationship("Laptop", back_populates="market_offers")
+    # producer = relationship("Producer", back_populates="market_offers")
