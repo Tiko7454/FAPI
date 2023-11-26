@@ -1,7 +1,24 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Date, Numeric
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import mapped_column, relationship
 
 from .database import Base
+
+
+class MarketOffer(Base):
+    __tablename__ = "market_offers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    volume = Column(Integer)
+    date = Column(Date)
+    cost = Column(Numeric)
+
+    # Many-to-one
+    laptop_id = mapped_column(ForeignKey("laptops.id"))
+    laptop = relationship("Laptop", back_populates="market_offers")
+
+    # Many-to-one
+    producer_id = mapped_column(ForeignKey("producers.id"))
+    producer = relationship("Producer", back_populates="market_offers")
 
 
 class Laptop(Base):
@@ -14,11 +31,12 @@ class Laptop(Base):
     screen_size = Column(Numeric)
     memory = Column(Integer)
 
-    # market_offers = relationship("MarketOffer", back_populates="laptop")
+    # One-to-many
+    market_offers = relationship(MarketOffer, back_populates="laptop")
 
 
 class Producer(Base):
-    __tablename__ = "producer"
+    __tablename__ = "producers"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
@@ -26,16 +44,5 @@ class Producer(Base):
     country = Column(String)
     place = Column(String)
 
-#     market_offers = relationship("MarketOffer", back_populates="producer")
-
-
-class MarketOffer(Base):
-    __tablename__ = "market_offers"
-
-    id = Column(Integer, primary_key=True, index=True)
-    volume = Column(Integer)
-    date = Column(Date)
-    cost = Column(Numeric)
-
-    # laptop = relationship("Laptop", back_populates="market_offers")
-    # producer = relationship("Producer", back_populates="market_offers")
+    # One-to-many
+    market_offers = relationship(MarketOffer, back_populates="producer")

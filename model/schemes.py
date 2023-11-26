@@ -14,8 +14,8 @@ class MarketOfferCreate(MarketOfferBase):
 
 class MarketOffer(MarketOfferBase):
     id: int
-    # laptop_id: int
-    # producer_id: int
+    laptop_id: int  # TODO: check if it works
+    producer_id: int  # TODO: check if it works
 
     class Config:
         from_attributes = True
@@ -35,7 +35,7 @@ class LaptopCreate(LaptopBase):
 
 class Laptop(BaseModel):
     id: int
-    # market_offers: list[MarketOffer]
+    market_offers: list[MarketOffer]  # TODO: check if it works
 
     class Config:
         from_attributes = True
@@ -54,7 +54,7 @@ class ProducerCreate(LaptopBase):
 
 class Producer(BaseModel):
     id: int
-    # market_offers: list[MarketOffer]
+    market_offers: list[MarketOffer]  # TODO: check if it works
 
     class Config:
         from_attributes = True
