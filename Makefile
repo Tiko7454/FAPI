@@ -30,7 +30,7 @@ docker:
 create_db:
 	@PGPASSWORD=$(PG_PASSWORD) createdb -h ${DB_HOST} -U ${PG_USER} ${DB_NAME}
 	@PGPASSWORD=$(PG_PASSWORD) psql -h localhost -U $(PG_USER) -c "ALTER DATABASE $(DB_NAME) OWNER TO $(PG_USER);"
-	@alembic revision --autogenerate -m "Init"
+	@alembic revision --autogenerate -m "Init" | alembic upgrade head
 
 drop_db:
 	@PGPASSWORD=$(PG_PASSWORD) psql -h localhost -U $(PG_USER) -c "DROP DATABASE IF EXISTS $(DB_NAME);"
