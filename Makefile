@@ -4,12 +4,12 @@ DB_NAME := fapi
 DB_HOST := localhost
 
 help:
-	@echo "run server: make run"
-	@echo "install dependencies: make deps"
-	@echo "perform migrations: make migrate"
-	@echo "run docker: make run_docker"
-	@echo "create db: make create_db"
-	@echo "drop db: make drop_db"
+	@echo "run server:                      make run"
+	@echo "install dependencies:            make deps"
+	@echo "perform migrations:              make migrate"
+	@echo "create/restart docker container: make docker"
+	@echo "create db:                       make create_db"
+	@echo "drop db:                         make drop_db"
 
 run:
 	uvicorn main:app --reload
@@ -23,8 +23,9 @@ requirements.txt: requirements.in
 migrate:
 	alembic upgrade head
 
-run_docker:
-	docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=${PASSWORD} ${PG_USER}
+docker:
+	docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=${PASSWORD} ${PG_USER} 2>/dev/null || true
+	docker start postgres
 
 create_db:
 	@PGPASSWORD=$(PG_PASSWORD) createdb -h ${DB_HOST} -U ${PG_USER} ${DB_NAME}
