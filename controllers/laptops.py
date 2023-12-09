@@ -24,3 +24,8 @@ def add_laptop(db: Session, laptop_data: LaptopCreate):
     )
     db.add(laptop)
     return laptop
+
+@commit_before_return
+def delete_laptop(db: Session, id: int):
+    laptop = db.query(Laptop).filter(Laptop.id == id).delete()
+    return laptop

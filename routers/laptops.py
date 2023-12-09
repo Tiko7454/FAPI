@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from models import schemes
 
 from views.laptops import get_laptops
-from controllers.laptops import add_laptop
+from controllers.laptops import add_laptop, delete_laptop
 from models.database import get_db
 
 
@@ -20,3 +20,8 @@ def get_laptops_routed(skip: int = 0, limit: int = 100, db: Session = Depends(ge
 @router.post("/", response_model=schemes.Laptop, status_code=201)
 def add_laptop_routed(laptop_data: schemes.LaptopCreate, db: Session = Depends(get_db)):
     return add_laptop(db, laptop_data=laptop_data)
+
+
+@router.delete("/{id}")
+def delete(id: int, db: Session = Depends(get_db)):  # FIXME: doesn't work correctly
+    return delete_laptop(db, id=id)

@@ -33,8 +33,7 @@ class LaptopCreate(LaptopBase):
     pass
 
 
-class Laptop(LaptopBase):
-    id: int
+class Laptop(LaptopCreate):
     market_offers: list[MarketOffer]
 
     class Config:
@@ -52,7 +51,7 @@ class ProducerCreate(ProducerBase):
     pass
 
 
-class Producer(ProducerBase):
+class Producer(ProducerCreate):
     id: int
     market_offers: list[MarketOffer]
 
