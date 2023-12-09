@@ -1,12 +1,13 @@
+from datetime import date
 from pydantic import BaseModel
 
 
 class MarketOfferBase(BaseModel):
     volume: int
-    date: str
+    date: date
     cost: float
-    laptop_id: int  # TODO: check if it works
-    producer_id: int  # TODO: check if it works
+    laptop_id: int
+    producer_id: int
 
 
 class MarketOfferCreate(MarketOfferBase):
@@ -34,7 +35,7 @@ class LaptopCreate(LaptopBase):
 
 class Laptop(LaptopBase):
     id: int
-    # market_offers: list[MarketOffer]  # TODO: check if it works
+    market_offers: list[MarketOffer]
 
     class Config:
         from_attributes = True
@@ -53,7 +54,7 @@ class ProducerCreate(ProducerBase):
 
 class Producer(ProducerBase):
     id: int
-    # market_offers: list[MarketOffer]  # TODO: check if it works
+    market_offers: list[MarketOffer]
 
     class Config:
         from_attributes = True

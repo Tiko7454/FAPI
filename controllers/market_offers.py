@@ -6,7 +6,7 @@ from models.schemes import MarketOfferCreate
 from .tools import commit_before_return
 
 
-#@commit_before_return
+@commit_before_return
 def add_market_offer(db: Session, market_offer_data: MarketOfferCreate):
     market_offer = MarketOffer(
         volume=market_offer_data.volume,

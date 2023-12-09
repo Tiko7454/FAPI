@@ -1,6 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Date, Numeric
 from sqlalchemy.orm import mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
+
 Base = declarative_base()
 
 
@@ -13,11 +14,15 @@ class MarketOffer(Base):
     cost = Column(Numeric)
 
     # Many-to-one
-    laptop_id = mapped_column(ForeignKey("laptops.id"))
+    laptop_id = mapped_column(
+        ForeignKey("laptops.id", ondelete="CASCADE"), nullable=False
+    )
     laptop = relationship("Laptop", back_populates="market_offers")
 
     # Many-to-one
-    producer_id = mapped_column(ForeignKey("producers.id"))
+    producer_id = mapped_column(
+        ForeignKey("producers.id", ondelete="CASCADE"), nullable=False
+    )
     producer = relationship("Producer", back_populates="market_offers")
 
 

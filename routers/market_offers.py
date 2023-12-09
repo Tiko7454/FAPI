@@ -17,7 +17,7 @@ def read_market_offers(skip: int = 0, limit: int = 100, db: Session = Depends(ge
     return market_offers
 
 
-@router.post("/", response_model=schemes.Laptop, status_code=201)
+@router.post("/", response_model=schemes.MarketOffer, status_code=201)
 def add_market_offer_routed(
     market_offer_data: schemes.MarketOfferCreate, db: Session = Depends(get_db)
 ):
