@@ -15,6 +15,12 @@ def add_laptop(db: Session, laptop_data: LaptopCreate):
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST, detail="The laptop already exists"
         )
-    laptop = Laptop(model=laptop_data.model)
+    laptop = Laptop(
+        cpu=laptop_data.cpu,
+        model=laptop_data.model,
+        gpu=laptop_data.gpu,
+        screen_size=laptop_data.screen_size,
+        memory=laptop_data.memory,
+    )
     db.add(laptop)
     return laptop
