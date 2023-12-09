@@ -7,6 +7,8 @@ help:
 	@echo "run server: make run"
 	@echo "install dependencies: make deps"
 	@echo "perform migrations: make migrate"
+	@echo "create db: make create_db"
+	@echo "drop db: make drop_db"
 
 run:
 	uvicorn main:app --reload
