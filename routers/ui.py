@@ -11,15 +11,15 @@ def homepage_routed():
 
 
 @router.get("/laptops", response_class=HTMLResponse)
-def laptops_routed():
-    return tablepage("laptops")
+def laptops_routed(p: int = 1):
+    return tablepage("laptops", page_number=p)
 
 
 @router.get("/producers", response_class=HTMLResponse)
-def producers_routed():
-    return tablepage("producers")
+def producers_routed(p: int = 1):
+    return tablepage("producers", page_number=p)
 
 
 @router.get("/market_offers", response_class=HTMLResponse)
-def market_offers_routed():
-    return tablepage("market_offers")
+def market_offers_routed(p: int = 1):
+    return tablepage("market_offers", page_number=p)

@@ -41,10 +41,21 @@ button.button_in_table {
     border: 0;
 }
 button.add_button {
-    position: fixed;
-    right: 0px;
-    left: 10px;
+    width: 100%;
+    flex: 1;
     padding: 10px;
+    text-align: center;
+}
+div.page_buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+button.page_button {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 </style></head>
 """
@@ -68,6 +79,12 @@ function add_element(table_name, content) {
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(content),
     });
+}
+function go_to_page(table_name, page_number) {
+    if (page_number == 0) {
+        return;
+    }
+    window.location.replace(`http://127.0.0.1:8000/homepage/${table_name}?p=${page_number}`);
 }
 function add_button_handler(table_name) {
     const add_line = document.getElementById('add');
@@ -162,11 +179,13 @@ def homepage():
     return doc.getvalue()
 
 
-def get_table(table_name):
-    return requests.get(f"http://127.0.0.1:8000/{table_name}").json()
+def get_table(table_name, page_number):
+    limit = 10
+    skip = (page_number - 1) * limit
+    return requests.get(f"http://127.0.0.1:8000/{table_name}?skip={skip}&limit={limit}").json()
 
 
-def tablepage(table_name):
+def tablepage(table_name, page_number: int):
     doc, tag, text = Doc().tagtext()
     with tag("html"):
         doc.asis(STYLE)
@@ -186,7 +205,7 @@ def tablepage(table_name):
                             pass
                     with tag("th"):
                         pass
-                for element in get_table(table_name):
+                for element in get_table(table_name, page_number):
                     with tag("tr", id=element["id"]):
                         for column_name, edit_policy in TABLE_DISPLAY_EDIT_POLICY[
                             table_name
@@ -229,4 +248,17 @@ def tablepage(table_name):
                 onclick=f"add_button_handler('{table_name}')",
             ):
                 text("add")
+            with tag('div', 'page_buttons'):
+                with tag(
+                    "button",
+                    klass="page_button",
+                    onclick=f"go_to_page('{table_name}', {page_number} - 1)",
+                ):
+                    text("<<")
+                with tag(
+                    "button",
+                    klass="page_button",
+                    onclick=f"go_to_page('{table_name}', {page_number} + 1)",
+                ):
+                    text(">>")
     return doc.getvalue()
