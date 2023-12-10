@@ -34,6 +34,7 @@ class LaptopCreate(LaptopBase):
 
 
 class Laptop(LaptopCreate):
+    id: int
     market_offers: list[MarketOffer]
 
     class Config:
