@@ -10,7 +10,7 @@ core.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(router=ui_router, prefix="/index")
+app.include_router(router=ui_router, prefix="/homepage")
 app.include_router(router=laptops_router, prefix="/laptops")
 app.include_router(router=producers_router, prefix="/producers")
 app.include_router(router=market_offers_router, prefix="/market_offers")
