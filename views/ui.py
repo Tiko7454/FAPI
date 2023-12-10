@@ -40,6 +40,12 @@ button.button_in_table {
     box-sizing: border-box;
     border: 0;
 }
+button.add_button {
+    position: fixed;
+    right: 0px;
+    left: 10px;
+    padding: 10px;
+}
 </style></head>
 """
 SCRIPT = """
@@ -50,13 +56,28 @@ function remove_element(table_name, id) {
     });
 }
 function edit_element(table_name, id, content) {
-    console.log(content)
-    console.log()
     fetch(`http://127.0.0.1:8000/${table_name}/${id}`, {
         method: 'PUT', 
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(content),
     });
+}
+function add_element(table_name, content) {
+    fetch(`http://127.0.0.1:8000/${table_name}/`, {
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(content),
+    });
+}
+function add_button_handler(table_name) {
+    const add_line = document.getElementById('add');
+    const input_data_cells = add_line.querySelectorAll(`[hascontent]`);
+    let data = {}
+    input_data_cells.forEach(cell => {
+        data[cell.id] = cell.children[0].value;
+    });
+    add_element(table_name, data);
+    window.location.reload();
 }
 function remove_button_handler(table_name, id) {
     remove_element(table_name, id);
@@ -191,5 +212,24 @@ def tablepage(table_name):
                                 onclick=f"remove_button_handler('{table_name}', {element['id']})",
                             ):
                                 text("remove")
-    # TODO: add add button
+
+                with tag("tr", id="add"):
+                    for column_name, _ in TABLE_DISPLAY_EDIT_POLICY[table_name]:
+                        if column_name == 'id':
+                            with tag("td"):
+                                pass
+                            continue
+                        with tag("td", hascontent='', id=column_name):
+                            doc.stag("input", type="text")
+                    if is_editable:
+                        with tag("td"):
+                            pass
+                    with tag("td"):
+                        pass
+            with tag(
+                "button",
+                klass="add_button",
+                onclick=f"add_button_handler('{table_name}')",
+            ):
+                text("add")
     return doc.getvalue()
