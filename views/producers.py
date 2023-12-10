@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from models import core
+from models.core import Producer
 
 
 def get_producers(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(core.Producer).offset(skip).limit(limit).all()
+    return db.query(Producer).order_by(Producer.id).offset(skip).limit(limit).all()

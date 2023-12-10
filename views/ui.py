@@ -163,10 +163,7 @@ def homepage():
 
 
 def get_table(table_name):
-    return sorted(
-        requests.get(f"http://127.0.0.1:8000/{table_name}").json(),
-        key=lambda el: el["id"],
-    )
+    return requests.get(f"http://127.0.0.1:8000/{table_name}").json()
 
 
 def tablepage(table_name):
