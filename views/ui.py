@@ -30,7 +30,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-    width: 100px;
+    width: 1000px;
 }
 th {
     background-color: #f2f2f2;
@@ -48,7 +48,6 @@ function remove_element(table_name, id) {
     fetch(`http://127.0.0.1:8000/${table_name}/${id}`, {
         method: 'DELETE', 
     });
-    window.location.reload();
 }
 function edit_element(table_name, id, content) {
     console.log(content)
@@ -58,10 +57,10 @@ function edit_element(table_name, id, content) {
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(content),
     });
-    window.location.reload();
 }
 function remove_button_handler(table_name, id) {
     remove_element(table_name, id);
+    window.location.reload();
 }
 function done_button_handler(table_name, id) {
     const line = document.getElementById(id);
@@ -75,6 +74,7 @@ function done_button_handler(table_name, id) {
         new_data[cell.id] = cell.innerHTML;
     });
     edit_element(table_name, id, new_data);
+    window.location.reload();
 }
 function edit_button_handler(table_name, id) {
     const line = document.getElementById(id);
