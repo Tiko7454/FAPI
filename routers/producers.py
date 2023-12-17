@@ -36,5 +36,5 @@ def update(
 
 
 @router.delete("/{id}")
-def delete(id: int, db: Session = Depends(get_db)):  # FIXME: doesn't work correctly
+def delete(id: int, db: Session = Depends(get_db)):
     return delete_producer(db, id=id)

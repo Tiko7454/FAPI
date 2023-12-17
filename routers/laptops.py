@@ -23,5 +23,5 @@ def add_laptop_routed(laptop_data: schemes.LaptopCreate, db: Session = Depends(g
 
 
 @router.delete("/{id}")
-def delete(id: int, db: Session = Depends(get_db)):  # FIXME: doesn't work correctly
+def delete(id: int, db: Session = Depends(get_db)):
     return delete_laptop(db, id=id)
