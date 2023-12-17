@@ -29,6 +29,7 @@ def join(db: Session, skip: int, limit: int, order_by: str):
 
 
 def group_by(db: Session, skip: int, limit: int):
+    """groups laptop screen_size and computes their avarage memory"""
     query = (
         db.query(
             Laptop.screen_size, func.sum(Laptop.memory) / func.count(Laptop.memory)
