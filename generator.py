@@ -182,9 +182,9 @@ for _ in range(1000):
     requests.post(f"http://127.0.0.1:8000/producers", data=json.dumps(data))
 
 
-for _ in range(100):
+for _ in range(10000):
     data = {}
-    data["volume"] = randint(1, 100)
+    data["volume"] = randint(1, 1000)
     data["date"] = generate_random_date("1995-01-01", "2023-05-05")
     data["cost"] = randint(1000, 2000)
     data["laptop_id"] = randint(1, 1000)
