@@ -17,13 +17,17 @@ class MarketOffer(Base):
     laptop_id = mapped_column(
         ForeignKey("laptops.id", ondelete="CASCADE"), nullable=False
     )
-    laptop = relationship("Laptop", back_populates="market_offers", cascade="all,delete")
+    laptop = relationship(
+        "Laptop", back_populates="market_offers", cascade="all,delete"
+    )
 
     # Many-to-one
     producer_id = mapped_column(
         ForeignKey("producers.id", ondelete="CASCADE"), nullable=False
     )
-    producer = relationship("Producer", back_populates="market_offers", cascade="all,delete")
+    producer = relationship(
+        "Producer", back_populates="market_offers", cascade="all,delete"
+    )
 
 
 class Laptop(Base):

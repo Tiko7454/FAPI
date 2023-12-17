@@ -4,14 +4,17 @@ import string
 import json
 import requests
 
+
 def generate_random_date(start_date, end_date):
-    start_datetime = datetime.strptime(start_date, '%Y-%m-%d')
-    end_datetime = datetime.strptime(end_date, '%Y-%m-%d')
-    
+    start_datetime = datetime.strptime(start_date, "%Y-%m-%d")
+    end_datetime = datetime.strptime(end_date, "%Y-%m-%d")
+
     random_days = randint(0, (end_datetime - start_datetime).days)
     random_date = start_datetime + timedelta(days=random_days)
-    
-    return random_date.strftime('%Y-%m-%d')
+
+    return random_date.strftime("%Y-%m-%d")
+
+
 def generate_random_string(size: int):
     characters = string.ascii_lowercase + string.digits
     return "".join(choice(characters) for _ in range(size))
@@ -150,12 +153,18 @@ countries_with_cities = {
     "Mexico": ["Mexico City", "Guadalajara", "Monterrey", "Puebla", "Tijuana"],
     "Italy": ["Rome", "Milan", "Naples", "Turin", "Florence"],
     "Spain": ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza"],
-    "Russia": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod"],
+    "Russia": [
+        "Moscow",
+        "Saint Petersburg",
+        "Novosibirsk",
+        "Yekaterinburg",
+        "Nizhny Novgorod",
+    ],
 }
 
 for _ in range(1000):
     data = {}
-    data["model"] = choice(companies) + '-' + generate_random_string(10)
+    data["model"] = choice(companies) + "-" + generate_random_string(10)
     data["cpu"] = choice(cpus)
     data["gpu"] = choice(gpus)
     data["screen_size"] = uniform(1000, 2000)
@@ -165,7 +174,7 @@ for _ in range(1000):
 
 for _ in range(1000):
     data = {}
-    data["name"] = choice(names) + ' ' + choice(names) + 'yan'
+    data["name"] = choice(names) + " " + choice(names) + "yan"
     data["guarantee"] = randint(1, 5)
     data["country"], cities = choice(list(countries_with_cities.items()))
     data["place"] = choice(cities)
@@ -175,10 +184,10 @@ for _ in range(1000):
 
 for _ in range(100):
     data = {}
-    data['volume'] = randint(1, 100)
-    data['date'] = generate_random_date('1995-01-01', '2023-05-05')
-    data['cost'] = randint(1000, 2000)
-    data['laptop_id'] = randint(1, 1000)
-    data['producer_id'] = randint(1, 1000)
+    data["volume"] = randint(1, 100)
+    data["date"] = generate_random_date("1995-01-01", "2023-05-05")
+    data["cost"] = randint(1000, 2000)
+    data["laptop_id"] = randint(1, 1000)
+    data["producer_id"] = randint(1, 1000)
 
     requests.post(f"http://127.0.0.1:8000/market_offers", data=json.dumps(data))

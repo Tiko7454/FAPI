@@ -24,9 +24,7 @@ def get_producer(db: Session, id: int):
 
 
 @commit_before_return
-def update_producer(
-        db: Session, id, producer_data: ProducerCreate
-):
+def update_producer(db: Session, id, producer_data: ProducerCreate):
     producer = get_producer(db, id).first()
     producer.guarantee = producer_data.guarantee
     producer.country = producer_data.country

@@ -182,7 +182,9 @@ def homepage():
 def get_table(table_name, page_number):
     limit = 20
     skip = (page_number - 1) * limit
-    return requests.get(f"http://127.0.0.1:8000/{table_name}?skip={skip}&limit={limit}").json()
+    return requests.get(
+        f"http://127.0.0.1:8000/{table_name}?skip={skip}&limit={limit}"
+    ).json()
 
 
 def tablepage(table_name, page_number: int):
@@ -231,11 +233,11 @@ def tablepage(table_name, page_number: int):
 
                 with tag("tr", id="add"):
                     for column_name, _ in TABLE_DISPLAY_EDIT_POLICY[table_name]:
-                        if column_name == 'id':
+                        if column_name == "id":
                             with tag("td"):
                                 pass
                             continue
-                        with tag("td", hascontent='', id=column_name):
+                        with tag("td", hascontent="", id=column_name):
                             doc.stag("input", type="text")
                     if is_editable:
                         with tag("td"):
@@ -248,7 +250,7 @@ def tablepage(table_name, page_number: int):
                 onclick=f"add_button_handler('{table_name}')",
             ):
                 text("add")
-            with tag('div', 'page_buttons'):
+            with tag("div", "page_buttons"):
                 with tag(
                     "button",
                     klass="page_button",

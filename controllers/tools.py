@@ -6,4 +6,5 @@ def commit_before_return(func):
         res = func(db, *args, **kwargs)
         db.commit()
         return res
+
     return wrapper
