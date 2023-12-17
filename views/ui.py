@@ -180,7 +180,7 @@ def homepage():
 
 
 def get_table(table_name, page_number):
-    limit = 10
+    limit = 20
     skip = (page_number - 1) * limit
     return requests.get(f"http://127.0.0.1:8000/{table_name}?skip={skip}&limit={limit}").json()
 
