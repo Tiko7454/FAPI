@@ -5,7 +5,7 @@ STYLE = """
 <head><style>
 .button-container {
     display: flex;
-    height: 100vh; /* 100% of the viewport height */
+    height: 98vh;
 }
 button.split {
     flex: 1;
